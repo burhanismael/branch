@@ -273,7 +273,7 @@
             <field name="name">Branch Account Journal</field>
             <field name="model_id" ref="model_account_journal"/>
             <field name="global" eval="True"/>
-<!--            <field name="domain_force">['|', ('branch_id', '=', False),('branch_id','=',user.branch_id.id)]-->
+            <!--            <field name="domain_force">['|', ('branch_id', '=', False),('branch_id','=',user.branch_id.id)]-->
             <!--            </field>-->
             <field name="domain_force">['|',('branch_id','=',False),('branch_id', 'in', [branch.id for branch in
                 user.branch_ids])]
