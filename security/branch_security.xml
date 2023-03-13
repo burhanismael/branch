@@ -153,7 +153,8 @@
             <field name="name">Picking Type Branch</field>
             <field name="model_id" ref="stock.model_stock_picking_type"/>
             <field name="global" eval="True"/>
-            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id', 'in', [branch.id for branch in
+                user.branch_ids])]</field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>
         </record>
 
