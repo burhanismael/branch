@@ -13,6 +13,7 @@ from . import inherited_stock_location
 from . import inherited_account_bank_statement
 from . import inherited_account_bank_statement_line
 from . import inherited_customer
+from . import inherited_hr_employee_ext
 from . import inherited_product
 from . import ir_http
 
