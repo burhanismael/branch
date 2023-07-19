@@ -6,6 +6,105 @@
             <field name="name">Branch</field>
             <field name="sequence">11</field>
         </record>
+        <!--        Category for the branch wise data-->
+        <record model="ir.module.category" id="branch_wise_categ">
+            <field name="name">Branch Wise Category</field>
+            <field name="description">All Branch wise Groups will be in it</field>
+            <field name="sequence">12</field>
+        </record>
+        <!--            1-->
+        <!--        if apply this group purchase order will be branch wise for that user-->
+        <record id="branch_wise_purchase_order" model="res.groups">
+            <field name="name">Purchase Order(Branch wise) ?</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="category_id" ref="branch_wise_categ"/>
+        </record>
+        <record id="purchase_branch_rule" model="ir.rule">
+            <field name="name">Purchase Order Branch</field>
+            <field name="model_id" ref="model_purchase_order"/>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
+            <field name="groups" eval="[(4, ref('branch.branch_wise_purchase_order'))]"/>
+        </record>
+        <!--            2-->
+        <!--        if apply this group Sale order will be branch wise for that user-->
+        <record id="branch_wise_sale_order" model="res.groups">
+            <field name="name">Sale Order(Branch wise) ?</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="category_id" ref="branch_wise_categ"/>
+        </record>
+        <record id="sale_order_branch_rule" model="ir.rule">
+            <field name="name">Sale Order Branch</field>
+            <field name="model_id" ref="model_sale_order"/>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
+            <field name="groups" eval="[(4, ref('branch.branch_wise_sale_order'))]"/>
+        </record>
+        <!--            3-->
+        <!--        if apply this group Partner will be branch wise for that user-->
+        <record id="branch_wise_partner" model="res.groups">
+            <field name="name">Partner(Branch wise) ?</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="category_id" ref="branch_wise_categ"/>
+        </record>
+        <record id="res_partner_branch_rule" model="ir.rule">
+            <field name="name">Res Partner Branch</field>
+            <field name="model_id" ref="model_res_partner"/>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
+            <field name="groups" eval="[(4, ref('branch.branch_wise_partner'))]"/>
+        </record>
+        <!--            4-->
+        <!--        if apply this group Payment will be branch wise for that user-->
+        <record id="branch_wise_payment" model="res.groups">
+            <field name="name">Paymenet(Branch wise) ?</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="category_id" ref="branch_wise_categ"/>
+        </record>
+        <record id="account_payment_branch_rule" model="ir.rule">
+            <field name="name">Account Payment Branch</field>
+            <field name="model_id" ref="model_account_payment"/>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]
+            </field>
+            <field name="groups" eval="[(4, ref('branch.branch_wise_payment'))]"/>
+        </record>
+        <!--            5-->
+        <!--        if apply this group Stock Location will be branch wise for that user-->
+        <record id="branch_wise_stock_location" model="res.groups">
+            <field name="name">Stock Location(Branch wise) ?</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="category_id" ref="branch_wise_categ"/>
+        </record>
+        <record id="stock_location_branch_rule" model="ir.rule">
+            <field name="name">Stock Location Branch</field>
+            <field name="model_id" ref="model_stock_location"/>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
+            <field name="groups" eval="[(4, ref('branch.branch_wise_stock_location'))]"/>
+        </record>
+        <!--            6-->
+        <!--        if apply this group employee will be branch wise for that user-->
+        <record id="branch_wise_hr_employee" model="res.groups">
+            <field name="name">HR Employee(Branch wise) ?</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="category_id" ref="branch_wise_categ"/>
+        </record>
+        <record id="hr_employee_branch_rule" model="ir.rule">
+            <field name="name">HR Employee Branch</field>
+            <field name="model_id" ref="model_hr_employee"/>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
+            <field name="groups" eval="[(4, ref('branch.branch_wise_hr_employee'))]"/>
+        </record>
+        <!--            7-->
+        <!--        if apply this group Account Moves(all types) will be branch wise for that user-->
+        <record id="branch_wise_account_move" model="res.groups">
+            <field name="name">Invoices/Bills/Journals(Branch wise) ?</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="category_id" ref="branch_wise_categ"/>
+        </record>
+        <record id="account_move_branch_rule" model="ir.rule">
+            <field name="name">Account Move Branch</field>
+            <field name="model_id" ref="model_account_move"/>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]
+            </field>
+            <field name="groups" eval="[(4, ref('branch.branch_wise_account_move'))]"/>
+        </record>
 
         <record id="group_branch_user" model="res.groups">
             <field name="name">User</field>
@@ -82,30 +181,6 @@
 
 
          -->
-
-        <record id="purchase_branch_rule" model="ir.rule">
-            <field name="name">Purchase Order Branch</field>
-            <field name="model_id" ref="model_purchase_order"/>
-            <field name="global" eval="True"/>
-            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
-<!--            <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>-->
-        </record>
-<!--        Sale Order Branch wise-->
-        <record id="sale_order_branch_rule" model="ir.rule">
-            <field name="name">Sale Order Branch</field>
-            <field name="model_id" ref="model_sale_order"/>
-            <field name="global" eval="True"/>
-            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
-<!--            <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>-->
-        </record>
-<!--        HR Employee Branch wise-->
-        <record id="hr_employee_branch_rule" model="ir.rule">
-            <field name="name">HR Employee Branch</field>
-            <field name="model_id" ref="model_hr_employee"/>
-            <field name="global" eval="True"/>
-            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
-<!--            <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>-->
-        </record>
 
         <record id="picking_branch_manager_rule" model="ir.rule">
             <field name="name">Picking Branch Manager</field>
@@ -278,22 +353,6 @@
             <field name="groups" eval="[(4, ref('branch.group_branch_user_manager'))]"/>
         </record>-->
 
-<!--        Partners Branchwise-->
-        <record id="res_partner_branch_rule" model="ir.rule">
-            <field name="name">Res Partner Branch</field>
-            <field name="model_id" ref="model_res_partner"/>
-            <field name="global" eval="True"/>
-            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
-<!--            <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>-->
-        </record>
-<!--        Stock Location Branchwise-->
-        <record id="stock_location_branch_rule" model="ir.rule">
-            <field name="name">Stock Location Branch</field>
-            <field name="model_id" ref="model_stock_location"/>
-            <field name="global" eval="True"/>
-            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
-<!--            <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>-->
-        </record>
 
         <!-- Branch rule account journal -->
         <record id="account_journal_branch_rule" model="ir.rule">
@@ -304,22 +363,6 @@
             <!--            </field>-->
             <field name="domain_force">['|',('branch_id','=',False),('branch_id', 'in', [branch.id for branch in
                 user.branch_ids])]
-            </field>
-        </record>
-        <!-- Branch rule account move-->
-        <record id="account_move_branch_rule" model="ir.rule">
-            <field name="name">Account Move Branch</field>
-            <field name="model_id" ref="model_account_move"/>
-            <field name="global" eval="True"/>
-            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]
-            </field>
-        </record>
-
-        <record id="account_payment_branch_rule" model="ir.rule">
-            <field name="name">Account Payment Branch</field>
-            <field name="model_id" ref="model_account_payment"/>
-            <field name="global" eval="True"/>
-            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]
             </field>
         </record>
 
