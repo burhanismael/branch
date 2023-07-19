@@ -7,7 +7,7 @@ from odoo.exceptions import UserError
 class StockLocation(models.Model):
     _inherit = 'stock.location'
 
-    branch_id = fields.Many2one('res.branch')
+    branch_id = fields.Many2one('res.branch', default=lambda self: self.env.user.branch_id.id)
 
     @api.constrains('branch_id')
     def _check_branch(self):

@@ -286,6 +286,14 @@
             <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
 <!--            <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>-->
         </record>
+<!--        Stock Location Branchwise-->
+        <record id="stock_location_branch_rule" model="ir.rule">
+            <field name="name">Stock Location Branch</field>
+            <field name="model_id" ref="model_stock_location"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
+<!--            <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>-->
+        </record>
 
         <!-- Branch rule account journal -->
         <record id="account_journal_branch_rule" model="ir.rule">
