@@ -6,8 +6,9 @@ from odoo import api, fields, models, _
 class ResUsers(models.Model):
     _inherit = 'res.users'
 
-    branch_ids = fields.Many2many('res.branch',string="Allowed Branch")
+    branch_ids = fields.Many2many('res.branch',string="Allowed Branches")
     branch_id = fields.Many2one('res.branch', string= 'Branch')
+    # branches_count = fields.Integer()
 
     def write(self, values):
         if 'branch_id' in values or 'branch_ids' in values:
