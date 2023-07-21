@@ -90,7 +90,7 @@ operating-Unit Operation for POS,operating-Unit Operation for Sales,operating-Un
     'website': 'https://www.browseinfo.in',
     "price": 149.00,
     "currency": 'EUR',
-    'depends': ['base', 'sale_management', 'purchase', 'stock', 'account', 'purchase_stock','web'],
+    'depends': ['base', 'sale_management', 'purchase', 'stock', 'account', 'purchase_stock','web', 'point_of_sale'],
     'uninstall_hook': '_uninstall_hook',
     'data': [
         'security/branch_security.xml',
@@ -110,6 +110,7 @@ operating-Unit Operation for POS,operating-Unit Operation for Sales,operating-Un
         'wizard/inherited_account_payment.xml',
         'views/inherited_product.xml',
         'views/inherited_partner.xml',
+        'views/pos_config_ext.xml',
     ],
     'assets': {    
         'web.assets_qweb': [
