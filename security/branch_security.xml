@@ -8,7 +8,7 @@
         </record>
         <record id="group_branch_user" model="res.groups">
             <field name="name">User</field>
-            <field name="implied_ids" eval="[(4, ref('base.group_user')),(4, ref('branch.group_multi_branch'))]"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
             <field name="category_id" ref="module_branch_management"/>
         </record>
 
@@ -23,7 +23,7 @@
         <record id="purchase_branch_manager_rule" model="ir.rule">
             <field name="name">Purchase Order Branch Manager</field>
             <field name="model_id" ref="model_purchase_order"/>
-            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user_manager'))]"/>
         </record>
         <record id="purchase_branch_rule" model="ir.rule">
@@ -36,7 +36,7 @@
         <record id="sale_order_branch_manager_rule" model="ir.rule">
             <field name="name">Sale Order Branch Manager</field>
             <field name="model_id" ref="model_sale_order"/>
-            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user_manager'))]"/>
         </record>
         <record id="sale_order_branch_rule" model="ir.rule">
@@ -49,7 +49,7 @@
         <record id="res_partner_branch_manager_rule" model="ir.rule">
             <field name="name">Res Partner Branch Manager</field>
             <field name="model_id" ref="model_res_partner"/>
-            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user_manager'))]"/>
         </record>
         <record id="res_partner_branch_rule" model="ir.rule">
@@ -62,7 +62,7 @@
         <record id="account_payment_branch_manager_rule" model="ir.rule">
             <field name="name">Account Payment Branch Manager</field>
             <field name="model_id" ref="model_account_payment"/>
-            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user_manager'))]"/>
         </record>
         <record id="account_payment_branch_rule" model="ir.rule">
@@ -79,17 +79,17 @@
         <!--            <field name="domain_force">[(1,'=',1)]</field>-->
         <!--            <field name="groups" eval="[(4, ref('branch.group_branch_user_manager'))]"/>-->
         <!--        </record>-->
-        <!--        <record id="stock_location_branch_rule" model="ir.rule">-->
-        <!--            <field name="name">Stock Location Branch User</field>-->
-        <!--            <field name="model_id" ref="model_stock_location"/>-->
-        <!--            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>-->
-        <!--&lt;!&ndash;            <field name="groups" eval="[(4, ref('branch.branch_wise_stock_location'))]"/>&ndash;&gt;-->
-        <!--        </record>-->
+                <record id="stock_location_branch_rule" model="ir.rule">
+                    <field name="name">Stock Location Branch User</field>
+                    <field name="model_id" ref="model_stock_location"/>
+                    <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
+                    <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>
+                </record>
         <!--            6-->
         <record id="hr_employee_branch_manager_rule" model="ir.rule">
             <field name="name">HR Employee Branch Manager</field>
             <field name="model_id" ref="model_hr_employee"/>
-            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user_manager'))]"/>
         </record>
         <record id="hr_employee_branch_rule" model="ir.rule">
@@ -102,7 +102,7 @@
         <record id="account_move_branch_manager_rule" model="ir.rule">
             <field name="name">Account Move Branch Manager</field>
             <field name="model_id" ref="model_account_move"/>
-            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user_manager'))]"/>
         </record>
         <record id="account_move_branch_rule" model="ir.rule">
@@ -116,7 +116,7 @@
         <record id="picking_branch_manager_rule" model="ir.rule">
             <field name="name">Picking Branch Manager</field>
             <field name="model_id" ref="model_stock_picking"/>
-            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user_manager'))]"/>
         </record>
         <record id="picking_branch_rule" model="ir.rule">
@@ -129,12 +129,25 @@
         <record id="pos_config_branch_manager_rule" model="ir.rule">
             <field name="name">POS Config Branch Manager</field>
             <field name="model_id" ref="model_pos_config"/>
-            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user_manager'))]"/>
         </record>
         <record id="pos_config_branch_rule" model="ir.rule">
             <field name="name">POS Config Branch User</field>
             <field name="model_id" ref="model_pos_config"/>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
+            <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>
+        </record>
+        <!--            10-->
+        <record id="account_move_line_branch_manager_rule" model="ir.rule">
+            <field name="name">Account Move Line Branch Manager</field>
+            <field name="model_id" ref="model_account_move_line"/>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
+            <field name="groups" eval="[(4, ref('branch.group_branch_user_manager'))]"/>
+        </record>
+        <record id="account_move_line_branch_rule" model="ir.rule">
+            <field name="name">Account Move Line Branch User</field>
+            <field name="model_id" ref="model_account_move_line"/>
             <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>
         </record>
@@ -156,7 +169,8 @@
             <field name="name">Res Branch User</field>
             <field name="model_id" ref="model_res_branch"/>
             <field name="global" eval="True"/>
-            <field name="domain_force">[('id','=',user.branch_id.id)]</field>
+<!--            <field name="domain_force">[('id','=',user.branch_id.id)]</field>-->
+            <field name="domain_force">[(1,'=',1)]</field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>
         </record>
 
@@ -169,7 +183,7 @@
         </record>
 
         <record id="sale.sale_order_see_all" model="ir.rule">
-            <field name="name">All Branch Orders</field>
+            <field name="name">Branch Orders</field>
             <field ref="model_sale_order" name="model_id"/>
             <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
             <field name="groups" eval="[(4, ref('sales_team.group_sale_salesman_all_leads'))]"/>
@@ -178,44 +192,16 @@
         <record id="sale_order_all_manager" model="ir.rule">
             <field name="name">All Orders</field>
             <field ref="model_sale_order" name="model_id"/>
-            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
             <field name="groups" eval="[(4,ref('sales_team.group_sale_manager'))]"/>
         </record>
 
-
-        <record id="purchase_branch_manager_rule" model="ir.rule">
-            <field name="name">Purchase Branch Manager</field>
-            <field name="model_id" ref="model_purchase_order"/>
-            <field name="global" eval="True"/>
-            <field name="domain_force">[(1,'=',1)]</field>
-            <field name="groups" eval="[(4, ref('branch.group_branch_user_manager'))]"/>
-        </record>
-
-
-        <!--     <record id="sale_order_branch_manager_rule" model="ir.rule">
-                <field name="name">Sale Branch Manager</field>
-                <field name="model_id" ref="model_sale_order"/>
-                <field name="global" eval="True"/>
-                <field name="domain_force">[(1,'=',1)]</field>
-                <field name="groups" eval="[(4, ref('branch.group_branch_user_manager'))]"/>
-            </record>
-
-
-         -->
-
-        <record id="picking_branch_manager_rule" model="ir.rule">
-            <field name="name">Picking Branch Manager</field>
-            <field name="model_id" ref="model_stock_picking"/>
-            <field name="global" eval="True"/>
-            <field name="domain_force">[(1,'=',1)]</field>
-            <field name="groups" eval="[(4, ref('branch.group_branch_user_manager'))]"/>
-        </record>
 
         <record id="warehouse_branch_manager_rule" model="ir.rule">
             <field name="name">Warehouse Branch Manager</field>
             <field name="model_id" ref="stock.model_stock_warehouse"/>
             <field name="global" eval="True"/>
-            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user_manager'))]"/>
         </record>
 
@@ -227,29 +213,11 @@
             <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>
         </record>
 
-        <record id="location_branch_manager_rule" model="ir.rule">
-            <field name="name">Location Branch Manager</field>
-            <field name="model_id" ref="model_stock_location"/>
-            <field name="global" eval="True"/>
-            <field name="domain_force">[(1,'=',1)]</field>
-            <field name="groups" eval="[(4, ref('branch.group_branch_user_manager'))]"/>
-        </record>
-
-        <record id="location_branch_rule" model="ir.rule">
-            <field name="name">Location Branch</field>
-            <field name="model_id" ref="model_stock_location"/>
-            <field name="global" eval="True"/>
-            <field name="domain_force">['|',('branch_id','=',False),('branch_id', 'in', [branch.id for branch in
-                user.branch_ids])]
-            </field>
-            <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>
-        </record>
-
         <record id="picking_type_branch_manager_rule" model="ir.rule">
             <field name="name">Picking Type Branch Manager</field>
             <field name="model_id" ref="stock.model_stock_picking_type"/>
             <field name="global" eval="True"/>
-            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user_manager'))]"/>
         </record>
 
@@ -267,7 +235,7 @@
             <field name="name">Stock Quant Branch Manager</field>
             <field name="model_id" ref="stock.model_stock_quant"/>
             <field name="global" eval="True"/>
-            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user_manager'))]"/>
         </record>
 
@@ -285,7 +253,7 @@
             <field name="name">Stock Move Line Branch Manager</field>
             <field name="model_id" ref="stock.model_stock_move_line"/>
             <field name="global" eval="True"/>
-            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user_manager'))]"/>
         </record>
 
@@ -299,27 +267,11 @@
             <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>
         </record>
 
-        <record id="warehouse_branch_manager_rule" model="ir.rule">
-            <field name="name">Warehouse Branch Manager</field>
-            <field name="model_id" ref="model_stock_warehouse"/>
-            <field name="global" eval="True"/>
-            <field name="domain_force">[(1,'=',1)]</field>
-            <field name="groups" eval="[(4, ref('branch.group_branch_user_manager'))]"/>
-        </record>
-
-        <record id="warehouse_branch_rule" model="ir.rule">
-            <field name="name">Warehouse Branch</field>
-            <field name="model_id" ref="model_stock_warehouse"/>
-            <field name="global" eval="True"/>
-            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
-            <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>
-        </record>
-
         <record id="product_template_branch_manager_rule" model="ir.rule">
             <field name="name">Product Template Branch Manager</field>
             <field name="model_id" ref="model_product_template"/>
             <field name="global" eval="True"/>
-            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user_manager'))]"/>
         </record>
 
@@ -335,7 +287,7 @@
             <field name="name">Product Product Branch Manager</field>
             <field name="model_id" ref="product.model_product_product"/>
             <field name="global" eval="True"/>
-            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user_manager'))]"/>
         </record>
 
