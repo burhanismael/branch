@@ -23,26 +23,26 @@
         <record id="purchase_branch_manager_rule" model="ir.rule">
             <field name="name">Purchase Order Branch Manager</field>
             <field name="model_id" ref="model_purchase_order"/>
-            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','in',user.branches_ids.ids)]</field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user_manager'))]"/>
         </record>
         <record id="purchase_branch_rule" model="ir.rule">
             <field name="name">Purchase Order Branch User</field>
             <field name="model_id" ref="model_purchase_order"/>
-            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','in',user.branches_ids.ids)]</field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>
         </record>
         <!--            2-->
         <record id="sale_order_branch_manager_rule" model="ir.rule">
             <field name="name">Sale Order Branch Manager</field>
             <field name="model_id" ref="model_sale_order"/>
-            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','in',user.branches_ids.ids)]</field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user_manager'))]"/>
         </record>
         <record id="sale_order_branch_rule" model="ir.rule">
             <field name="name">Sale Order Branch User</field>
             <field name="model_id" ref="model_sale_order"/>
-            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','in',user.branches_ids.ids)]</field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>
         </record>
         <!--            3-->
@@ -178,21 +178,21 @@
         <record id="sale.sale_order_personal_rule" model="ir.rule">
             <field name="name">Personal Orders</field>
             <field ref="model_sale_order" name="model_id"/>
-            <field name="domain_force">['|','&amp;','|',('branch_id','=',user.branch_id.id),('branch_id','=',False),('user_id','=',user.id),('user_id','=',False)]</field>
+            <field name="domain_force">['|','&amp;','|',('branch_id','in',user.branches_ids.ids),('branch_id','=',False),('user_id','=',user.id),('user_id','=',False)]</field>
             <field name="groups" eval="[(4, ref('sales_team.group_sale_salesman'))]"/>
         </record>
 
         <record id="sale.sale_order_see_all" model="ir.rule">
             <field name="name">Branch Orders</field>
             <field ref="model_sale_order" name="model_id"/>
-            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','in',user.branches_ids.ids)]</field>
             <field name="groups" eval="[(4, ref('sales_team.group_sale_salesman_all_leads'))]"/>
         </record>
 
         <record id="sale_order_all_manager" model="ir.rule">
             <field name="name">All Orders</field>
             <field ref="model_sale_order" name="model_id"/>
-            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','in',user.branches_ids.ids)]</field>
             <field name="groups" eval="[(4,ref('sales_team.group_sale_manager'))]"/>
         </record>
 
