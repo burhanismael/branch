@@ -129,13 +129,13 @@
         <record id="pos_config_branch_manager_rule" model="ir.rule">
             <field name="name">POS Config Branch Manager</field>
             <field name="model_id" ref="model_pos_config"/>
-            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','in',user.branches_ids.ids)]</field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user_manager'))]"/>
         </record>
         <record id="pos_config_branch_rule" model="ir.rule">
             <field name="name">POS Config Branch User</field>
             <field name="model_id" ref="model_pos_config"/>
-            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','in',user.branches_ids.ids)]</field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>
         </record>
         <!--            10-->
@@ -271,7 +271,7 @@
             <field name="name">Product Template Branch Manager</field>
             <field name="model_id" ref="model_product_template"/>
             <field name="global" eval="True"/>
-            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','in',user.branches_ids.ids)]</field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user_manager'))]"/>
         </record>
 
@@ -279,7 +279,7 @@
             <field name="name">Product Template Branch</field>
             <field name="model_id" ref="model_product_template"/>
             <field name="global" eval="True"/>
-            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','in',user.branches_ids.ids)]</field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>
         </record>
 
@@ -287,7 +287,7 @@
             <field name="name">Product Product Branch Manager</field>
             <field name="model_id" ref="product.model_product_product"/>
             <field name="global" eval="True"/>
-            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','in',user.branches_ids.ids)]</field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user_manager'))]"/>
         </record>
 
@@ -296,7 +296,7 @@
             <field name="model_id" ref="product.model_product_product"/>
             <field name="global" eval="True"/>
             <field name="domain_force">
-                ['|',('product_tmpl_id.branch_id','=',False),('product_tmpl_id.branch_id','=',user.branch_id.id)]
+                ['|',('product_tmpl_id.branch_id','=',False),('product_tmpl_id.branch_id','in',user.branches_ids.ids)]
             </field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>
         </record>
