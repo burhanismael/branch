@@ -116,13 +116,13 @@
         <record id="picking_branch_manager_rule" model="ir.rule">
             <field name="name">Picking Branch Manager</field>
             <field name="model_id" ref="model_stock_picking"/>
-            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','in',user.branches_ids.ids)]</field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user_manager'))]"/>
         </record>
         <record id="picking_branch_rule" model="ir.rule">
             <field name="name">Picking Branch User</field>
             <field name="model_id" ref="model_stock_picking"/>
-            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','in',user.branches_ids.ids)]</field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>
         </record>
         <!--            9-->
@@ -502,12 +502,6 @@
             <field name="groups" eval="[(4, ref('purchase.group_purchase_user'))]"/>
         </record>
 
-<!--        <record model="ir.rule" id="product.product_pricelist_item_comp_rule">-->
-<!--            <field name="name">product pricelist item company rule</field>-->
-<!--            <field name="model_id" ref="product.model_product_pricelist_item"/>-->
-<!--            <field name="domain_force">['|', ('company_id', 'in', company_ids), ('company_id', '=', False)]-->
-<!--            </field>-->
-<!--        </record>-->
     </data>
 
 </odoo>

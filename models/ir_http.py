@@ -5,6 +5,7 @@ import hashlib
 import json
 from odoo import api, models
 from odoo.http import request
+from urllib.parse import parse_qs, urlparse
 from odoo.tools import ustr
 import odoo
 
@@ -18,6 +19,17 @@ class Http(models.AbstractModel):
         session_info = super(Http, self).session_info()
     
         if self.env.user.has_group('base.group_user'):
+            session_info['user_branches']= {
+                    'current_branch': user.branch_id.id,
+                    'allowed_branches': {
+                        comp.id: {
+                            'id': comp.id,
+                            'name': comp.name,
+                            'company': comp.company_id.id,
+                        } for comp in user.branch_ids
+                    },
+                }
+
             session_info.update({
                 # current_company should be default_company
                 "user_companies": {
@@ -43,6 +55,7 @@ class Http(models.AbstractModel):
                 "show_effect": True,
                 "display_switch_company_menu": user.has_group('base.group_multi_company') and len(user.company_ids) > 1,
                 "display_switch_branch_menu": user.has_group('branch.group_multi_branch') and len(user.branch_ids) > 1,
+
                 "allowed_branch_ids" : user.branch_id.ids
             })
         return session_info

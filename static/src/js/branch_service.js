@@ -46,12 +46,10 @@ export const branchService = {
         const stringBIds = allowedBranchIds.join(",");
         router.replaceState({ bids: stringBIds }, { lock: true });
         cookie.setCookie("bids", stringBIds);
-
         user.updateContext({ allowed_branch_ids: allowedBranchIds });
         const availableBranches = session.user_branches.allowed_branches;
         const { user_companies } = session;
         const availablecompany = env.services.company.allowedCompanyIds;
-
         for (const [key, value] of Object.entries(availableBranches)) {
             for (const [key1, value1] of Object.entries(availablecompany)) {
                 if(value['company'] === value1){
