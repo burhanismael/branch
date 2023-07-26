@@ -62,13 +62,13 @@
         <record id="account_payment_branch_manager_rule" model="ir.rule">
             <field name="name">Account Payment Branch Manager</field>
             <field name="model_id" ref="model_account_payment"/>
-            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','in',user.branches_ids.ids)]</field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user_manager'))]"/>
         </record>
         <record id="account_payment_branch_rule" model="ir.rule">
             <field name="name">Account Payment Branch User</field>
             <field name="model_id" ref="model_account_payment"/>
-            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','in',user.branches_ids.ids)]
             </field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>
         </record>
@@ -89,13 +89,13 @@
         <record id="hr_employee_branch_manager_rule" model="ir.rule">
             <field name="name">HR Employee Branch Manager</field>
             <field name="model_id" ref="model_hr_employee"/>
-            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','in',user.branches_ids.ids)]</field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user_manager'))]"/>
         </record>
         <record id="hr_employee_branch_rule" model="ir.rule">
             <field name="name">HR Employee Branch User</field>
             <field name="model_id" ref="model_hr_employee"/>
-            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','in',user.branches_ids.ids)]</field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>
         </record>
         <!--            7-->
@@ -201,7 +201,7 @@
             <field name="name">Warehouse Branch Manager</field>
             <field name="model_id" ref="stock.model_stock_warehouse"/>
             <field name="global" eval="True"/>
-            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','in',user.branches_ids.ids)]</field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user_manager'))]"/>
         </record>
 
@@ -209,7 +209,7 @@
             <field name="name">Warehouse Branch</field>
             <field name="model_id" ref="stock.model_stock_warehouse"/>
             <field name="global" eval="True"/>
-            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','in',user.branches_ids.ids)]</field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>
         </record>
 
@@ -217,7 +217,7 @@
             <field name="name">Picking Type Branch Manager</field>
             <field name="model_id" ref="stock.model_stock_picking_type"/>
             <field name="global" eval="True"/>
-            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','in',user.branches_ids.ids)]</field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user_manager'))]"/>
         </record>
 
@@ -235,7 +235,7 @@
             <field name="name">Stock Quant Branch Manager</field>
             <field name="model_id" ref="stock.model_stock_quant"/>
             <field name="global" eval="True"/>
-            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','in',user.branches_ids.ids)]</field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user_manager'))]"/>
         </record>
 
@@ -244,7 +244,7 @@
             <field name="model_id" ref="stock.model_stock_quant"/>
             <field name="global" eval="True"/>
             <field name="domain_force">
-                ['|',('location_id.branch_id','=',False),('location_id.branch_id','=',user.branch_id.id)]
+                ['|',('location_id.branch_id','=',False),('branch_id','in',user.branches_ids.ids)]
             </field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>
         </record>
@@ -253,7 +253,7 @@
             <field name="name">Stock Move Line Branch Manager</field>
             <field name="model_id" ref="stock.model_stock_move_line"/>
             <field name="global" eval="True"/>
-            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','in',user.branches_ids.ids)]</field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user_manager'))]"/>
         </record>
 
@@ -262,7 +262,7 @@
             <field name="model_id" ref="stock.model_stock_move_line"/>
             <field name="global" eval="True"/>
             <field name="domain_force">
-                ['|',('location_dest_id.branch_id','=',False),('location_dest_id.branch_id','=',user.branch_id.id)]
+                ['|',('location_dest_id.branch_id','=',False),('branch_id','in',user.branches_ids.ids)]
             </field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>
         </record>
@@ -324,7 +324,7 @@
             <field name="name">Branch Account Journal</field>
             <field name="model_id" ref="model_account_journal"/>
             <field name="global" eval="True"/>
-            <field name="domain_force">['|', ('branch_id', '=', False),('branch_id','=',user.branch_id.id)]
+            <field name="domain_force">['|', ('branch_id', '=', False),('branch_id','in',user.branches_ids.ids)]
             </field>
             <!--            <field name="domain_force">['|',('branch_id','=',False),('branch_id', 'in', [branch.id for branch in-->
             <!--                user.branch_ids])]-->
