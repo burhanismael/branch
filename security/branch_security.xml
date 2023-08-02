@@ -248,6 +248,22 @@
             <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>
         </record>
 
+        <record id="account_account_manager_rule" model="ir.rule">
+            <field name="name">Account Account Branch Manager</field>
+            <field name="model_id" ref="account.model_account_account"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','in',user.branches_ids.ids)]</field>
+            <field name="groups" eval="[(4, ref('branch.group_branch_user_manager'))]"/>
+        </record>
+
+        <record id="account_account_branch_rule" model="ir.rule">
+            <field name="name">Account Account Branch</field>
+            <field name="model_id" ref="account.model_account_account"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','in',user.branches_ids.ids)]</field>
+            <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>
+        </record>
+
         <record id="stock_move_line_branch_manager_rule" model="ir.rule">
             <field name="name">Stock Move Line Branch Manager</field>
             <field name="model_id" ref="stock.model_stock_move_line"/>

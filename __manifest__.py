@@ -111,6 +111,7 @@ operating-Unit Operation for POS,operating-Unit Operation for Sales,operating-Un
         'views/inherited_product.xml',
         'views/inherited_partner.xml',
         'views/pos_config_ext.xml',
+        'views/inherited_account_account.xml',
     ],
     'assets': {    
         'web.assets_qweb': [

@@ -17,5 +17,6 @@ from . import inherited_hr_employee_ext
 from . import inherited_product
 from . import ir_http
 from . import pos_config_ext
+from . import inherited_account_account
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
