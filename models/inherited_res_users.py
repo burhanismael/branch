@@ -18,7 +18,7 @@ class ResUsers(models.Model):
     def write(self, values):
         if 'branch_id' in values or 'branch_ids' in values:
             self.env['ir.model.access'].call_cache_clearing_methods()
-            self.branches_ids = [int(item) if item else False for item in request.httprequest.cookies['bids'].split(',')]
+            self.branches_ids = [int(item) if type(item)==int else False for item in request.httprequest.cookies['bids'].split(',')]
         user = super(ResUsers, self).write(values)
         return user
 
