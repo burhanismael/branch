@@ -45,19 +45,6 @@
             <field name="domain_force">['|',('branch_id','=',False),('branch_id','in',user.branches_ids.ids)]</field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>
         </record>
-        <!--            3-->
-<!--        <record id="res_partner_branch_manager_rule" model="ir.rule">-->
-<!--            <field name="name">Res Partner Branch Manager</field>-->
-<!--            <field name="model_id" ref="model_res_partner"/>-->
-<!--            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>-->
-<!--            <field name="groups" eval="[(4, ref('branch.group_branch_user_manager'))]"/>-->
-<!--        </record>-->
-<!--        <record id="res_partner_branch_rule" model="ir.rule">-->
-<!--            <field name="name">Res Partner Branch User</field>-->
-<!--            <field name="model_id" ref="model_res_partner"/>-->
-<!--            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>-->
-<!--            <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>-->
-<!--        </record>-->
         <!--            4-->
         <record id="account_payment_branch_manager_rule" model="ir.rule">
             <field name="name">Account Payment Branch Manager</field>
@@ -316,24 +303,6 @@
             <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>
         </record>
 
-        <!--     <record id="res_users_branch_user_rule" model="ir.rule">
-                <field name="name">Res Users Branch User</field>
-                <field name="model_id" ref="base.model_res_users"/>
-                <field name="global" eval="True"/>
-                <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
-                <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>
-            </record>
-         -->
-
-        <!-- <record id="res_partner_branch_manager_rule" model="ir.rule">
-            <field name="name">Res Partner Branch Manager</field>
-            <field name="model_id" ref="model_res_partner"/>
-            <field name="global" eval="True"/>
-            <field name="domain_force">['|',('branch_id','=',False),('branch_id','in',[branch.id for branch in user.branch_ids])]</field>
-            <field name="groups" eval="[(4, ref('branch.group_branch_user_manager'))]"/>
-        </record>-->
-
-
         <!-- Branch rule account journal -->
         <record id="account_journal_branch_rule" model="ir.rule">
             <field name="name">Branch Account Journal</field>
@@ -341,38 +310,7 @@
             <field name="global" eval="True"/>
             <field name="domain_force">['|', ('branch_id', '=', False),('branch_id','in',user.branches_ids.ids)]
             </field>
-            <!--            <field name="domain_force">['|',('branch_id','=',False),('branch_id', 'in', [branch.id for branch in-->
-            <!--                user.branch_ids])]-->
-            <!--            </field>-->
         </record>
-        <!--        override Record Rules-->
-<!--        <record model="ir.rule" id="base.res_partner_rule">-->
-<!--            <field name="name">res.partner company</field>-->
-<!--            <field name="model_id" ref="base.model_res_partner"/>-->
-<!--            &lt;!&ndash; We exclude partners that have internal users (`partner_share` field) from-->
-<!--            the multi-company rule because it might interfere with the user's company rule-->
-<!--            and make some users unselectable in relational fields. This means that partners-->
-<!--            of internal users are always visible, not matter the company setting. &ndash;&gt;-->
-<!--            <field name="domain_force">['|', '|', ('partner_share', '=', False), ('company_id', 'in', company_ids),-->
-<!--                ('company_id', '=', False), '|', ('branch_id',-->
-<!--                '=', False), ('branch_id', '=', user.branch_id.id)]-->
-<!--            </field>-->
-<!--        </record>-->
-<!--        <record id="base.res_partner_rule_private_employee" model="ir.rule">-->
-<!--            <field name="name">res.partner.rule.private.employee</field>-->
-<!--            <field name="model_id" ref="base.model_res_partner"/>-->
-<!--            <field name="domain_force">-->
-<!--                ['|', ('type', '!=', 'private'), ('type', '=', False), '|', ('branch_id',-->
-<!--                '=', False), ('branch_id', '=', user.branch_id.id)]-->
-<!--            </field>-->
-<!--            <field name="groups" eval="[-->
-<!--                Command.link(ref('base.group_user')),-->
-<!--            ]"/>-->
-<!--            <field name="perm_read" eval="True"/>-->
-<!--            <field name="perm_write" eval="True"/>-->
-<!--            <field name="perm_create" eval="True"/>-->
-<!--            <field name="perm_unlink" eval="True"/>-->
-<!--        </record>-->
 
         <record id="sale.account_invoice_rule_see_all" model="ir.rule">
             <field name="name">All Invoices</field>
