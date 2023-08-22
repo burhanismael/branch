@@ -438,7 +438,6 @@
 <!--            </field>-->
 <!--            <field name="groups" eval="[(4, ref('purchase.group_purchase_user'))]"/>-->
 <!--        </record>-->
-
     </data>
 
 </odoo>
