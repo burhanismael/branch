@@ -5,4 +5,4 @@ class PosConfigExt(models.Model):
 
     # branch_id = fields.Many2one('res.branch', string='Branch')
 
-    # branch_id = fields.Many2one('res.branch', string='Branch', default=lambda self: self.env.user.branch_id.id)
+    branch_id = fields.Many2one('res.branch', string='Branch', default=lambda self: self.env.user.branch_id.id)
