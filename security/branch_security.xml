@@ -55,8 +55,7 @@
         <record id="account_payment_branch_rule" model="ir.rule">
             <field name="name">Account Payment Branch User</field>
             <field name="model_id" ref="model_account_payment"/>
-            <field name="domain_force">
-            </field>
+            <field name="domain_force"></field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>
         </record>
         <!--            5-->
@@ -95,8 +94,7 @@
         <record id="account_move_branch_rule" model="ir.rule">
             <field name="name">Account Move Branch User</field>
             <field name="model_id" ref="model_account_move"/>
-            <field name="domain_force">
-            </field>
+            <field name="domain_force"></field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>
         </record>
         <!--            8-->
@@ -211,8 +209,7 @@
             <field name="name">Picking Type Branch</field>
             <field name="model_id" ref="stock.model_stock_picking_type"/>
             <field name="global" eval="True"/>
-            <field name="domain_force">
-            </field>
+            <field name="domain_force"></field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>
         </record>
 
@@ -228,9 +225,7 @@
             <field name="name">Stock Quant Branch</field>
             <field name="model_id" ref="stock.model_stock_quant"/>
             <field name="global" eval="True"/>
-<!--            <field name="domain_force">-->
-<!--                ['|',('location_id.branch_id','=',False),('branch_id','in',user.branches_ids.ids)]-->
-<!--            </field>-->
+            <field name="domain_force"></field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>
         </record>
 
@@ -296,8 +291,7 @@
             <field name="name">Product Product Branch</field>
             <field name="model_id" ref="product.model_product_product"/>
             <field name="global" eval="True"/>
-            <field name="domain_force">
-            </field>
+            <field name="domain_force"></field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>
         </record>
 
@@ -306,8 +300,7 @@
             <field name="name">Branch Account Journal</field>
             <field name="model_id" ref="model_account_journal"/>
             <field name="global" eval="True"/>
-            <field name="domain_force">
-            </field>
+            <field name="domain_force"></field>
         </record>
 
 <!--        <record id="sale.account_invoice_rule_see_all" model="ir.rule">-->
