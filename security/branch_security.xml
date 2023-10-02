@@ -33,32 +33,32 @@
             <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>
         </record>
         <!--            2-->
-        <record id="sale_order_branch_manager_rule" model="ir.rule">
-            <field name="name">Sale Order Branch Manager</field>
-            <field name="model_id" ref="model_sale_order"/>
-            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
-            <field name="groups" eval="[(4, ref('branch.group_branch_user_manager'))]"/>
-        </record>
-        <record id="sale_order_branch_rule" model="ir.rule">
-            <field name="name">Sale Order Branch User</field>
-            <field name="model_id" ref="model_sale_order"/>
-            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
-            <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>
-        </record>
-        <!--            4-->
-<!--        <record id="account_payment_branch_manager_rule" model="ir.rule">-->
-<!--            <field name="name">Account Payment Branch Manager</field>-->
-<!--            <field name="model_id" ref="model_account_payment"/>-->
+<!--        <record id="sale_order_branch_manager_rule" model="ir.rule">-->
+<!--            <field name="name">Sale Order Branch Manager</field>-->
+<!--            <field name="model_id" ref="model_sale_order"/>-->
 <!--            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>-->
 <!--            <field name="groups" eval="[(4, ref('branch.group_branch_user_manager'))]"/>-->
 <!--        </record>-->
-<!--        <record id="account_payment_branch_rule" model="ir.rule">-->
-<!--            <field name="name">Account Payment Branch User</field>-->
-<!--            <field name="model_id" ref="model_account_payment"/>-->
-<!--            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]-->
-<!--            </field>-->
+<!--        <record id="sale_order_branch_rule" model="ir.rule">-->
+<!--            <field name="name">Sale Order Branch User</field>-->
+<!--            <field name="model_id" ref="model_sale_order"/>-->
+<!--            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>-->
 <!--            <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>-->
 <!--        </record>-->
+        <!--            4-->
+        <record id="account_payment_branch_manager_rule" model="ir.rule">
+            <field name="name">Account Payment Branch Manager</field>
+            <field name="model_id" ref="model_account_payment"/>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
+            <field name="groups" eval="[(4, ref('branch.group_branch_user_manager'))]"/>
+        </record>
+        <record id="account_payment_branch_rule" model="ir.rule">
+            <field name="name">Account Payment Branch User</field>
+            <field name="model_id" ref="model_account_payment"/>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]
+            </field>
+            <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>
+        </record>
         <!--            5-->
         <record id="stock_location_branch_manager_rule" model="ir.rule">
             <field name="name">Stock Location Branch Manager</field>
@@ -86,19 +86,28 @@
             <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>
         </record>
         <!--            7-->
-        <record id="account_move_branch_manager_rule" model="ir.rule">
-            <field name="name">Account Move Branch Manager</field>
-            <field name="model_id" ref="model_account_move"/>
-            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
-            <field name="groups" eval="[(4, ref('branch.group_branch_user_manager'))]"/>
-        </record>
-        <record id="account_move_branch_rule" model="ir.rule">
-            <field name="name">Account Move Branch User</field>
-            <field name="model_id" ref="model_account_move"/>
-            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]
-            </field>
-            <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>
-        </record>
+
+
+
+        <!--From here am going to do development on -->
+
+
+
+
+
+<!--        <record id="account_move_branch_manager_rule" model="ir.rule">-->
+<!--            <field name="name">Account Move Branch Manager</field>-->
+<!--            <field name="model_id" ref="model_account_move"/>-->
+<!--            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>-->
+<!--            <field name="groups" eval="[(4, ref('branch.group_branch_user_manager'))]"/>-->
+<!--        </record>-->
+<!--        <record id="account_move_branch_rule" model="ir.rule">-->
+<!--            <field name="name">Account Move Branch User</field>-->
+<!--            <field name="model_id" ref="model_account_move"/>-->
+<!--            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]-->
+<!--            </field>-->
+<!--            <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>-->
+<!--        </record>-->
         <!--            8-->
         <record id="picking_branch_manager_rule" model="ir.rule">
             <field name="name">Picking Branch Manager</field>
@@ -312,132 +321,142 @@
             </field>
         </record>
 
-        <record id="sale.account_invoice_rule_see_all" model="ir.rule">
-            <field name="name">All Invoices</field>
-            <field name="model_id" ref="sale.model_account_move"/>
-            <field name="domain_force">['&amp;', ('move_type', 'in', ('out_invoice', 'out_refund')), '|', ('branch_id',
-                '=', False), ('branch_id','=',user.branch_id.id)]
-            </field>
-            <field name="groups" eval="[(4, ref('sales_team.group_sale_salesman_all_leads'))]"/>
-        </record>
-        <record id="sale.account_invoice_line_rule_see_all" model="ir.rule">
-            <field name="name">All Invoice Lines</field>
-            <field name="model_id" ref="sale.model_account_move_line"/>
-            <field name="domain_force">['&amp;', ('move_id.move_type', 'in', ('out_invoice', 'out_refund')), '|',
-                ('branch_id', '=', False), ('branch_id','=',user.branch_id.id)]
-            </field>
-            <field name="groups" eval="[(4, ref('sales_team.group_sale_salesman_all_leads'))]"/>
-        </record>
+<!--        <record id="sale.account_invoice_rule_see_all" model="ir.rule">-->
+<!--            <field name="name">All Invoices</field>-->
+<!--            <field name="model_id" ref="sale.model_account_move"/>-->
+<!--            <field name="domain_force">['&amp;', ('move_type', 'in', ('out_invoice', 'out_refund')), '|', ('branch_id',-->
+<!--                '=', False), ('branch_id','=',user.branch_id.id)]-->
+<!--            </field>-->
+<!--            <field name="groups" eval="[(4, ref('sales_team.group_sale_salesman_all_leads'))]"/>-->
+<!--        </record>-->
+<!--        <record id="sale.account_invoice_line_rule_see_all" model="ir.rule">-->
+<!--            <field name="name">All Invoice Lines</field>-->
+<!--            <field name="model_id" ref="sale.model_account_move_line"/>-->
+<!--            <field name="domain_force">['&amp;', ('move_id.move_type', 'in', ('out_invoice', 'out_refund')), '|',-->
+<!--                ('branch_id', '=', False), ('branch_id','=',user.branch_id.id)]-->
+<!--            </field>-->
+<!--            <field name="groups" eval="[(4, ref('sales_team.group_sale_salesman_all_leads'))]"/>-->
+<!--        </record>-->
 
-        <record id="sale.account_invoice_rule_see_personal" model="ir.rule">
-            <field name="name">Personal Invoices</field>
-            <field name="model_id" ref="sale.model_account_move"/>
-            <field name="domain_force">['&amp;',('move_type', 'in', ('out_invoice', 'out_refund')), '|',
-                ('invoice_user_id','=', user.id), ('invoice_user_id', '=', False),'|', ('branch_id', '=', False),
-                ('branch_id','=',user.branch_id.id)]
-            </field>
-            <field name="groups" eval="[(4, ref('sales_team.group_sale_salesman'))]"/>
-        </record>
-        <record id="sale.account_invoice_line_rule_see_personal" model="ir.rule">
-            <field name="name">Personal Invoice Lines</field>
-            <field name="model_id" ref="sale.model_account_move_line"/>
-            <field name="domain_force">['&amp;',('move_id.move_type', 'in', ('out_invoice', 'out_refund')), '|', ('move_id.invoice_user_id', '=', user.id), ('move_id.invoice_user_id', '=', False),'|', ('branch_id', '=', False), ('branch_id','=',user.branch_id.id)]
-            </field>
-            <field name="groups" eval="[(4, ref('sales_team.group_sale_salesman'))]"/>
-        </record>
-        <!--        Readonly Auditor Group Override-->
-        <record id="account.account_move_rule_group_readonly" model="ir.rule">
-            <field name="name">Readonly Move</field>
-            <field name="model_id" ref="account.model_account_move"/>
-            <field name="domain_force">['&amp;', (1, '=', 1),'|', ('branch_id', '=', False), ('branch_id','=',user.branch_id.id)]</field>
-            <field name="groups" eval="[(4, ref('account.group_account_readonly'))]"/>
-            <field name="perm_write" eval="False"/>
-            <field name="perm_create" eval="False"/>
-            <field name="perm_unlink" eval="False"/>
-        </record>
-        <record id="account.account_move_line_rule_group_readonly" model="ir.rule">
-            <field name="name">Readonly Move Line</field>
-            <field name="model_id" ref="account.model_account_move_line"/>
-            <field name="domain_force">['&amp;', (1, '=', 1),'|', ('branch_id', '=', False), ('branch_id','=',user.branch_id.id)]</field>
-            <field name="groups" eval="[(4, ref('account.group_account_readonly'))]"/>
-            <field name="perm_write" eval="False"/>
-            <field name="perm_create" eval="False"/>
-            <field name="perm_unlink" eval="False"/>
-        </record>
+<!--        <record id="sale.account_invoice_rule_see_personal" model="ir.rule">-->
+<!--            <field name="name">Personal Invoices</field>-->
+<!--            <field name="model_id" ref="sale.model_account_move"/>-->
+<!--            <field name="domain_force">['&amp;',('move_type', 'in', ('out_invoice', 'out_refund')), '|',-->
+<!--                ('invoice_user_id','=', user.id), ('invoice_user_id', '=', False),'|', ('branch_id', '=', False),-->
+<!--                ('branch_id','=',user.branch_id.id)]-->
+<!--            </field>-->
+<!--            <field name="groups" eval="[(4, ref('sales_team.group_sale_salesman'))]"/>-->
+<!--        </record>-->
+<!--        <record id="sale.account_invoice_line_rule_see_personal" model="ir.rule">-->
+<!--            <field name="name">Personal Invoice Lines</field>-->
+<!--            <field name="model_id" ref="sale.model_account_move_line"/>-->
+<!--            <field name="domain_force">['&amp;',('move_id.move_type', 'in', ('out_invoice', 'out_refund')), '|', ('move_id.invoice_user_id', '=', user.id), ('move_id.invoice_user_id', '=', False),'|', ('branch_id', '=', False), ('branch_id','=',user.branch_id.id)]-->
+<!--            </field>-->
+<!--            <field name="groups" eval="[(4, ref('sales_team.group_sale_salesman'))]"/>-->
+<!--        </record>-->
+<!--        &lt;!&ndash;        Readonly Auditor Group Override&ndash;&gt;-->
+<!--        <record id="account.account_move_rule_group_readonly" model="ir.rule">-->
+<!--            <field name="name">Readonly Move</field>-->
+<!--            <field name="model_id" ref="account.model_account_move"/>-->
+<!--            <field name="domain_force">['&amp;', (1, '=', 1),'|', ('branch_id', '=', False), ('branch_id','=',user.branch_id.id)]</field>-->
+<!--            <field name="groups" eval="[(4, ref('account.group_account_readonly'))]"/>-->
+<!--            <field name="perm_write" eval="False"/>-->
+<!--            <field name="perm_create" eval="False"/>-->
+<!--            <field name="perm_unlink" eval="False"/>-->
+<!--        </record>-->
+
+<!--        <record id="account.account_move_line_rule_group_readonly" model="ir.rule">-->
+<!--            <field name="name">Readonly Move Line</field>-->
+<!--            <field name="model_id" ref="account.model_account_move_line"/>-->
+<!--            <field name="domain_force">['&amp;', (1, '=', 1),'|', ('branch_id', '=', False), ('branch_id','=',user.branch_id.id)]</field>-->
+<!--            <field name="groups" eval="[(4, ref('account.group_account_readonly'))]"/>-->
+<!--            <field name="perm_write" eval="False"/>-->
+<!--            <field name="perm_create" eval="False"/>-->
+<!--            <field name="perm_unlink" eval="False"/>-->
+<!--        </record>-->
+
+
+
         <!--    Billing group override-->
-        <record id="account.account_move_rule_group_invoice" model="ir.rule">
-            <field name="name">Readonly Move</field>
-            <field name="model_id" ref="account.model_account_move"/>
-            <field name="domain_force">['&amp;', (1, '=', 1),'|', ('branch_id', '=', False),('branch_id','=',user.branch_id.id)]</field>
-            <field name="groups" eval="[(4, ref('account.group_account_invoice'))]"/>
-        </record>
+<!--        <record id="account.account_move_rule_group_invoice" model="ir.rule">-->
+<!--            <field name="name">Readonly Move</field>-->
+<!--            <field name="model_id" ref="account.model_account_move"/>-->
+<!--            <field name="domain_force">['&amp;', (1, '=', 1),'|', ('branch_id', '=', False),('branch_id','=',user.branch_id.id)]</field>-->
+<!--            <field name="groups" eval="[(4, ref('account.group_account_invoice'))]"/>-->
+<!--        </record>-->
 
-        <record id="account.account_move_line_rule_group_invoice" model="ir.rule">
-            <field name="name">Readonly Move Line</field>
-            <field name="model_id" ref="account.model_account_move_line"/>
-            <field name="domain_force">['&amp;', (1, '=', 1),'|', ('branch_id', '=', False),('branch_id','=',user.branch_id.id)]</field>
-            <field name="groups" eval="[(4, ref('account.group_account_invoice'))]"/>
-        </record>
-        <record id="account.account_move_see_all" model="ir.rule">
-            <field name="name">All Journal Entries</field>
-            <field ref="model_account_move" name="model_id"/>
-            <field name="domain_force">['&amp;',(1, '=', 1),'|', ('branch_id', '=', False),('branch_id','=',user.branch_id.id)]
-            </field>
-            <field name="groups" eval="[(4, ref('account.group_account_invoice'))]"/>
-        </record>
-        <record id="account.account_move_line_comp_rule" model="ir.rule">
-            <field name="name">Entry lines</field>
-            <field name="model_id" ref="account.model_account_move_line"/>
-            <field name="domain_force">['|',('company_id','=',False),('company_id', 'in', company_ids),'|',('branch_id', '=', False),('branch_id','=',user.branch_id.id)]
-            </field>
-        </record>
-        <record id="account.account_move_line_see_all" model="ir.rule">
-            <field name="name">All Journal Items</field>
-            <field ref="account.model_account_move_line" name="model_id"/>
-            <field name="domain_force">['&amp;',(1, '=', 1),'|',('branch_id', '=', False),('branch_id','=',user.branch_id.id)]
-            </field>
-            <field name="groups" eval="[(4, ref('account.group_account_invoice'))]"/>
-        </record>
-        <record id="account.account_invoice_line_rule_portal" model="ir.rule">
-            <field name="name">Portal Invoice Lines</field>
-            <field name="model_id" ref="account.model_account_move_line"/>
-            <field name="domain_force">[('parent_state', 'not in', ('cancel', 'draft')), ('move_id.is_move_sent', '=',
-                True), ('move_id.move_type', 'in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund')),
-                ('move_id.message_partner_ids','child_of',[user.commercial_partner_id.id]),'|',('branch_id', '=', False),('branch_id','=',user.branch_id.id)]
-            </field>
-            <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
-        </record>
 
-        <record id="account.account_invoice_rule_portal" model="ir.rule">
-            <field name="name">Portal Personal Account Invoices</field>
-            <field name="model_id" ref="account.model_account_move"/>
-            <field name="domain_force">[('state', 'not in', ('cancel', 'draft')), ('is_move_sent', '=', True),
-                ('move_type', 'in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund')),
-                ('message_partner_ids','child_of',[user.commercial_partner_id.id]), '|',('branch_id', '=', False),
-               ('branch_id','=',user.branch_id.id)]
-            </field>
-            <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
-        </record>
+
+<!--        <record id="account.account_move_line_rule_group_invoice" model="ir.rule">-->
+<!--            <field name="name">Readonly Move Line</field>-->
+<!--            <field name="model_id" ref="account.model_account_move_line"/>-->
+<!--            <field name="domain_force">['&amp;', (1, '=', 1),'|', ('branch_id', '=', False),('branch_id','=',user.branch_id.id)]</field>-->
+<!--            <field name="groups" eval="[(4, ref('account.group_account_invoice'))]"/>-->
+<!--        </record>-->
+
+
+<!--        <record id="account.account_move_see_all" model="ir.rule">-->
+<!--            <field name="name">All Journal Entries</field>-->
+<!--            <field ref="model_account_move" name="model_id"/>-->
+<!--            <field name="domain_force">['&amp;',(1, '=', 1),'|', ('branch_id', '=', False),('branch_id','=',user.branch_id.id)]-->
+<!--            </field>-->
+<!--            <field name="groups" eval="[(4, ref('account.group_account_invoice'))]"/>-->
+<!--        </record>-->
+
+
+<!--        <record id="account.account_move_line_comp_rule" model="ir.rule">-->
+<!--            <field name="name">Entry lines</field>-->
+<!--            <field name="model_id" ref="account.model_account_move_line"/>-->
+<!--            <field name="domain_force">['|',('company_id','=',False),('company_id', 'in', company_ids),'|',('branch_id', '=', False),('branch_id','=',user.branch_id.id)]-->
+<!--            </field>-->
+<!--        </record>-->
+<!--        <record id="account.account_move_line_see_all" model="ir.rule">-->
+<!--            <field name="name">All Journal Items</field>-->
+<!--            <field ref="account.model_account_move_line" name="model_id"/>-->
+<!--            <field name="domain_force">['&amp;',(1, '=', 1),'|',('branch_id', '=', False),('branch_id','=',user.branch_id.id)]-->
+<!--            </field>-->
+<!--            <field name="groups" eval="[(4, ref('account.group_account_invoice'))]"/>-->
+<!--        </record>-->
+<!--        <record id="account.account_invoice_line_rule_portal" model="ir.rule">-->
+<!--            <field name="name">Portal Invoice Lines</field>-->
+<!--            <field name="model_id" ref="account.model_account_move_line"/>-->
+<!--            <field name="domain_force">[('parent_state', 'not in', ('cancel', 'draft')), ('move_id.is_move_sent', '=',-->
+<!--                True), ('move_id.move_type', 'in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund')),-->
+<!--                ('move_id.message_partner_ids','child_of',[user.commercial_partner_id.id]),'|',('branch_id', '=', False),('branch_id','=',user.branch_id.id)]-->
+<!--            </field>-->
+<!--            <field name="groups" eval="[(4, ref('base.group_portal'))]"/>-->
+<!--        </record>-->
+
+<!--        <record id="account.account_invoice_rule_portal" model="ir.rule">-->
+<!--            <field name="name">Portal Personal Account Invoices</field>-->
+<!--            <field name="model_id" ref="account.model_account_move"/>-->
+<!--            <field name="domain_force">[('state', 'not in', ('cancel', 'draft')), ('is_move_sent', '=', True),-->
+<!--                ('move_type', 'in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund')),-->
+<!--                ('message_partner_ids','child_of',[user.commercial_partner_id.id]), '|',('branch_id', '=', False),-->
+<!--               ('branch_id','=',user.branch_id.id)]-->
+<!--            </field>-->
+<!--            <field name="groups" eval="[(4, ref('base.group_portal'))]"/>-->
+<!--        </record>-->
 
         <!--        Portal Invoice Lines(unarchived) no issue created-->
         <!--        Project/Task: portal users: portal user can edit with project sharing feature-->
         <!--        account.analytic.line.timesheet.portal.user-->
-        <record id="purchase.purchase_user_account_move_line_rule" model="ir.rule">
-            <field name="name">Purchase User Account Move Line</field>
-            <field name="model_id" ref="account.model_account_move_line"/>
-            <field name="domain_force">['&amp;',('move_id.move_type', 'in', ('in_invoice', 'in_refund',
-                'in_receipt')),'|', ('branch_id', '=', False), ('branch_id','=',user.branch_id.id)]
-            </field>
-            <field name="groups" eval="[(4, ref('purchase.group_purchase_user'))]"/>
-        </record>
-        <record id="purchase.purchase_user_account_move_rule" model="ir.rule">
-            <field name="name">Purchase User Account Move</field>
-            <field name="model_id" ref="account.model_account_move"/>
-            <field name="domain_force">['&amp;',('move_type', 'in', ('in_invoice', 'in_refund', 'in_receipt')),'|',
-                ('branch_id', '=', False),('branch_id','=',user.branch_id.id)]
-            </field>
-            <field name="groups" eval="[(4, ref('purchase.group_purchase_user'))]"/>
-        </record>
+<!--        <record id="purchase.purchase_user_account_move_line_rule" model="ir.rule">-->
+<!--            <field name="name">Purchase User Account Move Line</field>-->
+<!--            <field name="model_id" ref="account.model_account_move_line"/>-->
+<!--            <field name="domain_force">['&amp;',('move_id.move_type', 'in', ('in_invoice', 'in_refund',-->
+<!--                'in_receipt')),'|', ('branch_id', '=', False), ('branch_id','=',user.branch_id.id)]-->
+<!--            </field>-->
+<!--            <field name="groups" eval="[(4, ref('purchase.group_purchase_user'))]"/>-->
+<!--        </record>-->
+<!--        <record id="purchase.purchase_user_account_move_rule" model="ir.rule">-->
+<!--            <field name="name">Purchase User Account Move</field>-->
+<!--            <field name="model_id" ref="account.model_account_move"/>-->
+<!--            <field name="domain_force">['&amp;',('move_type', 'in', ('in_invoice', 'in_refund', 'in_receipt')),'|',-->
+<!--                ('branch_id', '=', False),('branch_id','=',user.branch_id.id)]-->
+<!--            </field>-->
+<!--            <field name="groups" eval="[(4, ref('purchase.group_purchase_user'))]"/>-->
+<!--        </record>-->
 
     </data>
 
