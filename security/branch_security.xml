@@ -25,7 +25,7 @@
             <field name="model_id" ref="model_purchase_order"/>
             <field name="domain_force">['|','&amp;','|',('branch_id','=',user.branch_id.id),('branch_id','=',False),('user_id','=',user.id),('user_id','=',False)]</field>
             <field name="groups"
-                   eval="[(4, ref('branch.group_branch_user')),(4, ref('purchase.group_purchase_user'))]"/>
+                   eval="[(4, ref('branch.group_branch_user'))]"/>
         </record>
 
         <record id="purchase_branch_manager_rule" model="ir.rule">
