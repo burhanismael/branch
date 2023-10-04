@@ -19,7 +19,7 @@
             <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
         </record>
 
-        <!--1-->
+        <!--1 done-->
         <record id="purchase_branch_rule" model="ir.rule">
             <field name="name">Purchase Order Branch User</field>
             <field name="model_id" ref="model_purchase_order"/>
@@ -43,7 +43,7 @@
         </record>
 
 
-        <!--4-->
+        <!--4 done-->
         <record id="account_payment_branch_manager_rule" model="ir.rule">
             <field name="name">Account Payment Branch Manager</field>
             <field name="model_id" ref="model_account_payment"/>
@@ -59,7 +59,7 @@
         </record>
 
 
-        <!--5-->
+        <!--5 done-->
         <record id="stock_location_branch_manager_rule" model="ir.rule">
             <field name="name">Stock Location Branch Manager</field>
             <field name="model_id" ref="model_stock_location"/>
@@ -73,11 +73,11 @@
             <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>
         </record>
 
-        <!--6-->
+        <!--6 done-->
         <record id="hr_employee_branch_manager_rule" model="ir.rule">
             <field name="name">HR Employee Branch Manager</field>
             <field name="model_id" ref="model_hr_employee"/>
-            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
+            <field name="domain_force">[(1,'=',1)]</field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user_manager'))]"/>
         </record>
         <record id="hr_employee_branch_rule" model="ir.rule">
@@ -102,16 +102,20 @@
         <!--            </field>-->
         <!--            <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>-->
         <!--        </record>-->
-        <!--            8-->
+
+        <!--8 done-->
         <record id="picking_branch_manager_rule" model="ir.rule">
             <field name="name">Picking Branch Manager</field>
             <field name="model_id" ref="model_stock_picking"/>
-            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user_manager'))]"/>
         </record>
+
         <record id="picking_branch_rule" model="ir.rule">
-            <field name="name">Picking Branch User</field>
+            <field name="name">Picking Branch</field>
             <field name="model_id" ref="model_stock_picking"/>
+            <field name="global" eval="True"/>
             <field name="domain_force">['|',('branch_id','=',False),('branch_id','=',user.branch_id.id)]</field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>
         </record>
@@ -166,7 +170,7 @@
         </record>
 
 
-        <!--Sale order record rules -->
+        <!--Sale order record rules done -->
 
         <record id="sale.sale_order_personal_rule" model="ir.rule">
             <field name="name">Personal Orders</field>
@@ -208,6 +212,8 @@
             <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>
         </record>
 
+
+
         <record id="picking_type_branch_manager_rule" model="ir.rule">
             <field name="name">Picking Type Branch Manager</field>
             <field name="model_id" ref="stock.model_stock_picking_type"/>
@@ -242,6 +248,7 @@
             </field>
             <field name="groups" eval="[(4, ref('branch.group_branch_user'))]"/>
         </record>
+
 
         <record id="account_account_manager_rule" model="ir.rule">
             <field name="name">Account Account Branch Manager</field>
@@ -321,6 +328,16 @@
             </field>
         </record>
 
+        <!--To Show Personal Invoices of the user-->
+        <record id="sale.account_invoice_rule_see_personal" model="ir.rule">
+            <field name="name">Personal Invoices</field>
+            <field name="model_id" ref="sale.model_account_move"/>
+            <field name="domain_force">['&amp;',('move_type', 'in', ('out_invoice', 'out_refund')), '|',
+                ('invoice_user_id','=', user.id), ('invoice_user_id', '=', False),'|', ('branch_id', '=', False),
+                ('branch_id','=',user.branch_id.id)]
+            </field>
+            <field name="groups" eval="[(4, ref('sales_team.group_sale_salesman'))]"/>
+        </record>
 
         <!--To Show all the branch invoices to branch manager-->
         <record id="sale.account_invoice_rule_see_all" model="ir.rule">
@@ -332,16 +349,16 @@
             <field name="groups" eval="[(4, ref('sales_team.group_sale_salesman_all_leads'))]"/>
         </record>
 
-        <!--To Show Personal Invoices of the user-->
-        <record id="sale.account_invoice_rule_see_personal" model="ir.rule">
-            <field name="name">Personal Invoices</field>
+
+        <record id="account_invoice_rule_see_all_admin" model="ir.rule">
+            <field name="name">All Invoices Administrator</field>
             <field name="model_id" ref="sale.model_account_move"/>
-            <field name="domain_force">['&amp;',('move_type', 'in', ('out_invoice', 'out_refund')), '|',
-                ('invoice_user_id','=', user.id), ('invoice_user_id', '=', False),'|', ('branch_id', '=', False),
-                ('branch_id','=',user.branch_id.id)]
+            <field name="domain_force">[(1,'=',1)]
             </field>
-            <field name="groups" eval="[(4, ref('sales_team.group_sale_salesman'))]"/>
+            <field name="groups" eval="[(4, ref('sales_team.group_sale_manager'))]"/>
         </record>
+
+
 
 
         <!--        <record id="sale.account_invoice_line_rule_see_all" model="ir.rule">-->
