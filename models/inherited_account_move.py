@@ -58,8 +58,8 @@ class AccountMove(models.Model):
                 vals.update({"branch_id":brch_id})
         if self.env.context.get('active_model') == "account.move" and not vals.get("branch_id",False):
             #print("branch_miss",self.env.context.get('active_id'))
-            if self.env.context.get('active_ids') and len(self.env.context.get('active_ids'))>1:
-                raise UserError("Process individual records!!")
+            # if self.env.context.get('active_ids') and len(self.env.context.get('active_ids'))>1:
+            #     raise UserError("Process individual records!!")
 
             if self.env.context.get('active_id'):
                 move_rec = self.env['account.move'].browse(self.env.context.get('active_id'))
